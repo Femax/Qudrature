@@ -4,8 +4,8 @@
 public class Main {
 
     public static void main(String[] args) {
-        float leftx = 0;
-        float rightx = 1;
+        float leftx = -3;
+        float rightx = 3;
         float step = 0.25f;
         float integral = 0;
         float[] x = getMassiveX(leftx, rightx, step);
@@ -95,23 +95,35 @@ public class Main {
 //        return tempX;
 //    }
 
+//    public static float methodlegandra(float a, float b) {
+//        float[] x = new float[]{-0.83603f, 0.83603f, -0.96816f, 0.96816f, -0.32425f};
+//        float[] x3 = new float[]{-0.9324700f, -0.6612094f, -0.238614f, 0.2386142f, 0.6612094f, 0.9324700f};
+//        float[] ai2 = new float[]{0.1713245f, 0.3607616f, 0.4679140f, 0.4679140f, 0.3607616f, 0.1713245f};
+//        float sum = 0;
+//        float[] x2 = new float[x.length];
+//        float[] ai = new float[x.length];
+//        for (int i = 0; i < x.length; i++) {
+//            x2[i] = a + ((x[i] + 1) * (a - b)) / 2;
+//            ai[i] = (float) (2 / (1 - Math.pow(x3[i], 2) + Math.pow(dlegandra6(x3[i]), 2)));   //<---
+//        }
+//        for (int i = 0; i < x.length; i++) {
+//            sum += ai2[i] * function1(x3[i]);         // <---
+//        }
+//        return (a - b) / 10 * (sum);
+//    }
+
+
     public static float methodlegandra(float a, float b) {
-        float[] x = new float[]{-0.83603f, 0.83603f, -0.96816f, 0.96816f, -0.32425f};
         float[] x3 = new float[]{-0.9324700f, -0.6612094f, -0.238614f, 0.2386142f, 0.6612094f, 0.9324700f};
         float[] ai2 = new float[]{0.1713245f, 0.3607616f, 0.4679140f, 0.4679140f, 0.3607616f, 0.1713245f};
         float sum = 0;
-        float[] x2 = new float[x.length];
-        float[] ai = new float[x.length];
-        for (int i = 0; i < x.length; i++) {
-            x2[i] = a + ((x[i] + 1) * (a - b)) / 2;
-            ai[i] = (float) (2 / (1 - Math.pow(x3[i], 2) + Math.pow(dlegandra6(x3[i]), 2)));   //<---
+        float ra = (b - a) / 2;
+        float su = (a + b) / 2;
+        for (int i = 0; i < x3.length; i++) {
+            sum += ai2[i] * function1(b - a / 2 * x3[i] + a + b / 2);
         }
-        for (int i = 0; i < x.length; i++) {
-            sum += ai2[i] * function1(x3[i]);         // <---
-        }
-        return (a - b) / 10 * (sum);
+        return (b - a) / 2 * (sum);
     }
-
 
 
     public static float dlegandra9(float x) {
